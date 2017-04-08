@@ -41,6 +41,14 @@ module.exports = function(grunt){
               'angular.min.js',
               'angular.min.js.map'],
         dest: 'server/public/vendors/angular/'
+      },
+      jquery: {
+        expand: true,
+        cwd: 'node_modules/jquery/dist/',
+        src: ['jquery.js',
+              'jquery.min.js',
+              'jquery.min.map'],
+        dest: 'server/public/vendors/jquery/'
       }
     },
     watch: {
