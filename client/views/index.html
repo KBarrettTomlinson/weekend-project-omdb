@@ -60,7 +60,9 @@
               <p>{{searchResult.movie.writer}}</p>
               <p>{{searchResult.movie.year}}</p>
               <p>{{searchResult.movie.plot}}</p>
-              <button type="button" class="btn btn-default" ng-click = 'addToFavorites(searchResult.movie.title)'>Add to Favorites</button>
+              <button type="button" class="btn btn-default" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
+                Add to Favorites
+              </button>
 
             </div>
           </div>

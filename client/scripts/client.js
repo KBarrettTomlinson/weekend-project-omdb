@@ -40,8 +40,13 @@ klmApp.controller( 'MainController' , [ '$scope', '$http', function( $scope, $ht
 
     $scope.addToFavorites = addToFavorites;
 
-    function addToFavorites(title){
-      console.log( "You're trying to add to favorites", title);
+    function addToFavorites(title, year){
+      console.log( "You're trying to add to favorites", title, year);
+      var favoriteObject = {};
+      favoriteObject.title = title;
+      favoriteObject.year = year;
+      listOfFavoritesArray.push(favoriteObject);
+      console.log(listOfFavoritesArray, "listOfFavoritesArray");
 
     }
 
