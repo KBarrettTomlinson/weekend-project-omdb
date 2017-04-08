@@ -18,7 +18,39 @@
 
   </head>
   <body>
-    <h1> is this thing on?</h1>
+    <div id = 'wrapper' class = 'container'>
+      <div id = 'headerWrapper' class = 'navbar navbar-default navbar-fixed-top'>
 
+        <div id = 'header' class = 'row'>
+          <h1> Keith Loves Movies <small>* not affiliated with Doug Loves Movies</small></h1>
+        </div>
+
+        <div id = 'searchBar' class = 'row'>
+          <form class="form-inline">
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="searchMovieTitle" placeholder="Enter Movie Title">
+            </div>
+
+            <button type="submit" class="btn btn-default">Search</button>
+
+          </form>
+        </div>
+
+      </div>
+
+      <div id = 'displayWrapper' class = 'row'>
+
+        <div id = 'favoritesDisplay' class = 'col-sm-3'>
+          <span>favorites will display here</span>
+        </div>
+
+        <div id = 'resultsDisplay' class = 'col-sm-9'>
+          <span>search results will display here</span>
+        </div>
+
+      </div>
+
+    </div>
   </body>
 </html>

@@ -1,0 +1,40 @@
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 110px;
+}
+
+/*div{
+  border: 1px solid black;
+}*/
+
+#wrapper{
+
+}
+
+#headerWrapper{
+text-align: center;
+}
+
+#header{
+
+}
+
+#searchBar{
+
+}
+
+#displayWrapper{
+
+}
+
+#favoritesDisplay{
+
+}
+
+#resultsDisplay{
+
+}
