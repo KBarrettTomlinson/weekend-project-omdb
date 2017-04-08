@@ -24,13 +24,26 @@ klmApp.controller( 'MainController' , [ '$scope', '$http', function( $scope, $ht
         movie.poster = response.data.Poster;
         movie.year = response.data.Year;
         movie.writer = response.data.Writer;
+        movie.plot = response.data.Plot;
         console.log(movie);
         searchResult.movie = movie;
       });
-      
+
     var searchResult = {};
     $scope.searchResult = searchResult;
-    console.log("search result object", $scope.searchResult);
+    var test = {title: 'Lost Highway'};
+    var listOfFavoritesArray = [test];
+    var favorites = {};
+    favorites.list = listOfFavoritesArray;
+
+    $scope.favorites = favorites;
+
+    $scope.addToFavorites = addToFavorites;
+
+    function addToFavorites(title){
+      console.log( "You're trying to add to favorites", title);
+
+    }
 
   }//ends findMovie
 

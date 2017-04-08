@@ -42,12 +42,28 @@
       <div id = 'displayWrapper' class = 'row'>
 
         <div id = 'favoritesDisplay' class = 'col-sm-3'>
-          <span>favorites will display here</span>
+          <strong>Favorites</strong>
+          <p ng-repeat = 'movieTitle in favorites.list'>{{movieTitle.title}}</p>
         </div>
 
         <div id = 'resultsDisplay' class = 'col-sm-9'>
-          <span>search results will display here</span>
-          <span>{{searchResult}}</span>
+          <div class = 'row' >
+
+            <div class = 'col-sm-6'>
+              <img src="{{searchResult.movie.poster}}">
+            </div>
+
+            <div class = 'col-sm-6'>
+              <strong>Directed by:</strong>
+              <p>{{searchResult.movie.director}}</p>
+              <strong>Written by:</strong>
+              <p>{{searchResult.movie.writer}}</p>
+              <p>{{searchResult.movie.year}}</p>
+              <p>{{searchResult.movie.plot}}</p>
+              <button type="button" class="btn btn-default" ng-click = 'addToFavorites(searchResult.movie.title)'>Add to Favorites</button>
+
+            </div>
+          </div>
         </div>
 
       </div>
