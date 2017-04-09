@@ -1,28 +1,30 @@
 // setup angular module
 var klmApp = angular.module( 'klmApp', []);
-var testObject = {title: "Dune"};
-console.log("testObject",testObject);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.searchObject = {};
+  console.log("inside SearchController");
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
 
 klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.searchResult = MovieService.searchResult;
+  console.log("when does this fire? Inside DisplayController");
   $scope.addToFavorites = MovieService.addToFavorites;
+  $scope.testFunction = function(){console.log("testFunction");};
 }]);//ends DisplayController
 
 klmApp.controller('FavoritesController', ['$scope', 'MovieService', function($scope, MovieService){
-  $scope.MovieService.favorites = MovieService.favorites;
-  $scope.deleteMovie = Service.deleteMovie;
+  $scope.favorites = MovieService.favorites;
+  console.log("inside FavoritesController");
+  $scope.deleteMovie = MovieService.deleteMovie;
 }]);//ends FavoritesController
 
 klmApp.factory( 'MovieService', ['$http', function($http){
   var listOfFavoritesArray = [];
   var favorites = {};
   var searchResult = {};
-
+  console.log("favorites", favorites);
 
   return{
     searchResult: searchResult,

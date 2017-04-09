@@ -22,7 +22,7 @@
       <div id = 'headerWrapper' class = 'navbar navbar-default navbar-fixed-top'>
 
         <div id = 'header' class = 'row'>
-          <h1> Keith Loves Movies <small>* not affiliated with Doug Loves Movies</small></h1>
+          <h1> Keith &hearts; 's Movies <small>* not affiliated with Doug Loves Movies</small></h1>
         </div>
 
         <div id = 'searchBar' class = 'row' ng-controller = 'SearchController'>
@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div id = 'resultsDisplay' class = 'col-sm-9' ng-controller = 'DisplayController'>
+        <div id = 'resultsDisplay' class = 'col-sm-9' ng-controller = 'DisplayController' >
           <div class = 'row' >
 
             <div class = 'col-sm-6'>
@@ -57,6 +57,7 @@
             </div>
 
             <div class = 'col-sm-6'>
+
               <strong>Directed by:</strong>
               <p>{{searchResult.movie.director}}</p>
               <strong>Written by:</strong>
