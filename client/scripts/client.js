@@ -1,22 +1,19 @@
+console.log("I'm still here for you.");
 // setup angular module
 var klmApp = angular.module( 'klmApp', []);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.searchObject = {};
-  console.log("inside SearchController");
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
 
 klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.searchResult = MovieService.searchResult;
-  console.log("when does this fire? Inside DisplayController");
   $scope.addToFavorites = MovieService.addToFavorites;
-  $scope.testFunction = function(){console.log("testFunction");};
 }]);//ends DisplayController
 
 klmApp.controller('FavoritesController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.favorites = MovieService.favorites;
-  console.log("inside FavoritesController");
   $scope.deleteMovie = MovieService.deleteMovie;
 }]);//ends FavoritesController
 
@@ -24,22 +21,19 @@ klmApp.factory( 'MovieService', ['$http', function($http){
   var listOfFavoritesArray = [];
   var favorites = {};
   var searchResult = {};
-  console.log("favorites", favorites);
 
   return{
     searchResult: searchResult,
     favorites: favorites,
     findMovie: function (object){
-      console.log("inside findMovie");
-      console.log(object);
       var copy = angular.copy(object);
       var title = copy.title;
-      console.log("copy",copy,"title", title);
+
       object.title = '';
+
       // var searchResult = {};
       $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
         then(function(response){
-          console.log(response);
           var movie = {};
           movie.title = response.data.Title;
           movie.director = response.data.Director;
@@ -48,7 +42,6 @@ klmApp.factory( 'MovieService', ['$http', function($http){
           movie.writer = response.data.Writer;
           movie.plot = response.data.Plot;
           searchResult.movie = movie;
-          console.log(searchResult);
         });//ends response
       // $scope.searchResult = searchResult;
     },//ends findMovie
@@ -60,6 +53,16 @@ klmApp.factory( 'MovieService', ['$http', function($http){
         var newYear = angular.copy(year);
         favoriteObject.title = newTitle;
         favoriteObject.year = newYear;
+
+        $http.post('/favorites/addFavorite', favoriteObject).then(function(response){
+          console.log(response);
+        });//ends post to addFavorite
+
+        $http.get('/favorites').then(function(response){
+          console.log("get all favorites",response);
+
+        });
+
         console.log(favoriteObject);
         listOfFavoritesArray.push(favoriteObject);
         console.log(listOfFavoritesArray, "listOfFavoritesArray");
