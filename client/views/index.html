@@ -43,9 +43,10 @@
 
         <div id = 'favoritesDisplay' class = 'col-sm-3' ng-controller = 'FavoritesController'>
           <strong>Favorites</strong>
-          <div ng-repeat = 'movieTitle in favorites.list'>
-            <p >{{movieTitle.title}}</p>
-            <button type="button" class="btn btn-default" ng-click='deleteMovie($index)'>Delete</button>
+          <div ng-repeat = 'movie in favorites.list'>
+            <p>{{movie.title}}</p>
+            <p>{{movie.year}}</p>
+            <button type="button" class="btn btn-default" ng-click='deleteMovie($index, movie._id)'>Delete</button>
           </div>
         </div>
 
@@ -57,17 +58,22 @@
             </div>
 
             <div class = 'col-sm-6'>
+              <div class = row>
+                <div class = 'col-sm-9'>
+                  <strong>Directed by:</strong>
+                  <p>{{searchResult.movie.director}}</p>
+                  <strong>Written by:</strong>
+                  <p>{{searchResult.movie.writer}}</p>
+                  <p>{{searchResult.movie.year}}</p>
+                  <p>{{searchResult.movie.plot}}</p>
+                </div>
 
-              <strong>Directed by:</strong>
-              <p>{{searchResult.movie.director}}</p>
-              <strong>Written by:</strong>
-              <p>{{searchResult.movie.writer}}</p>
-              <p>{{searchResult.movie.year}}</p>
-              <p>{{searchResult.movie.plot}}</p>
-              <button type="button" class="btn btn-default" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
-                Add to Favorites
-              </button>
-
+                <div id = 'favoritesButton' class = 'col-sm-3'>
+                  <button type="button" class="btn btn-default" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
+                    Add to Favorites
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

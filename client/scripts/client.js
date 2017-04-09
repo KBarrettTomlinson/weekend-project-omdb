@@ -1,22 +1,19 @@
+console.log("I'm still here for you.");
 // setup angular module
 var klmApp = angular.module( 'klmApp', []);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.searchObject = {};
-  console.log("inside SearchController");
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
 
 klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.searchResult = MovieService.searchResult;
-  console.log("when does this fire? Inside DisplayController");
   $scope.addToFavorites = MovieService.addToFavorites;
-  $scope.testFunction = function(){console.log("testFunction");};
 }]);//ends DisplayController
 
 klmApp.controller('FavoritesController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.favorites = MovieService.favorites;
-  console.log("inside FavoritesController");
   $scope.deleteMovie = MovieService.deleteMovie;
 }]);//ends FavoritesController
 
@@ -24,22 +21,26 @@ klmApp.factory( 'MovieService', ['$http', function($http){
   var listOfFavoritesArray = [];
   var favorites = {};
   var searchResult = {};
-  console.log("favorites", favorites);
+
+  $http.get('/favorites').then(function(response){
+    console.log("get all favorites",response);
+    favorites.list = response.data;
+    console.log("favorites.list");
+  });
+
 
   return{
     searchResult: searchResult,
     favorites: favorites,
     findMovie: function (object){
-      console.log("inside findMovie");
-      console.log(object);
       var copy = angular.copy(object);
       var title = copy.title;
-      console.log("copy",copy,"title", title);
+
       object.title = '';
+
       // var searchResult = {};
       $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
         then(function(response){
-          console.log(response);
           var movie = {};
           movie.title = response.data.Title;
           movie.director = response.data.Director;
@@ -48,9 +49,7 @@ klmApp.factory( 'MovieService', ['$http', function($http){
           movie.writer = response.data.Writer;
           movie.plot = response.data.Plot;
           searchResult.movie = movie;
-          console.log(searchResult);
         });//ends response
-      // $scope.searchResult = searchResult;
     },//ends findMovie
 
     addToFavorites:   function (title, year){
@@ -60,15 +59,32 @@ klmApp.factory( 'MovieService', ['$http', function($http){
         var newYear = angular.copy(year);
         favoriteObject.title = newTitle;
         favoriteObject.year = newYear;
-        console.log(favoriteObject);
-        listOfFavoritesArray.push(favoriteObject);
-        console.log(listOfFavoritesArray, "listOfFavoritesArray");
-        favorites.list = listOfFavoritesArray;
+
+        $http.post('/favorites/addFavorite', favoriteObject).then(function(response){
+          console.log(response);
+          $http.get('/favorites').then(function(response){
+            console.log("get all favorites",response);
+            favorites.list = response.data;
+            console.log("favorites.list");
+          });// ends get to favorites
+        });//ends post to addFavorite
       },//ends addToFavorites
 
-    deleteMovie: function (index){
+    deleteMovie: function (index, id){
         console.log("you are trying to delete a movie");
-        favorites.list.splice(index, 1);
+        // favorites.list.splice(index, 1);
+        console.log("id", id);
+        var deleteId = {};
+        deleteId.id = id;
+        console.log("deleteId", deleteId);
+        $http.delete('/favorites/deleteFavorite/'+ id).then(function(response){
+          console.log(response);
+          $http.get('/favorites').then(function(response){
+            console.log("get all favorites",response);
+            favorites.list = response.data;
+            console.log("favorites.list");
+          });//ends get to favorites
+        });//ends delete to deleteFavorite
       },//ends deleteMovie
   };//ends return
 
