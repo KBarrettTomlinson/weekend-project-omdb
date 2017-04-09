@@ -17,7 +17,7 @@
 
 
   </head>
-  <body>
+  <body ng-controller='MainController'>
     <div id = 'wrapper' class = 'container'>
       <div id = 'headerWrapper' class = 'navbar navbar-default navbar-fixed-top'>
 
@@ -25,14 +25,14 @@
           <h1> Keith Loves Movies <small>* not affiliated with Doug Loves Movies</small></h1>
         </div>
 
-        <div id = 'searchBar' class = 'row'>
+        <div id = 'searchBar' class = 'row' >
           <form class="form-inline">
 
             <div class="form-group">
-              <input type="text" class="form-control" id="searchMovieTitle" placeholder="Enter Movie Title">
+              <input type="text" class="form-control" id="searchMovieTitle" placeholder="Enter Movie Title" ng-model='searchObject.title'>
             </div>
 
-            <button type="submit" class="btn btn-default">Search</button>
+            <button type="button" class="btn btn-default" ng-click='findMovie(searchObject)'>Search</button>
 
           </form>
         </div>
@@ -42,11 +42,33 @@
       <div id = 'displayWrapper' class = 'row'>
 
         <div id = 'favoritesDisplay' class = 'col-sm-3'>
-          <span>favorites will display here</span>
+          <strong>Favorites</strong>
+          <div ng-repeat = 'movieTitle in favorites.list'>
+            <p >{{movieTitle.title}}</p>
+            <button type="button" class="btn btn-default" ng-click='deleteMovie($index)'>Delete</button>
+          </div>
         </div>
 
         <div id = 'resultsDisplay' class = 'col-sm-9'>
-          <span>search results will display here</span>
+          <div class = 'row' >
+
+            <div class = 'col-sm-6'>
+              <img src="{{searchResult.movie.poster}}">
+            </div>
+
+            <div class = 'col-sm-6'>
+              <strong>Directed by:</strong>
+              <p>{{searchResult.movie.director}}</p>
+              <strong>Written by:</strong>
+              <p>{{searchResult.movie.writer}}</p>
+              <p>{{searchResult.movie.year}}</p>
+              <p>{{searchResult.movie.plot}}</p>
+              <button type="button" class="btn btn-default" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
+                Add to Favorites
+              </button>
+
+            </div>
+          </div>
         </div>
 
       </div>
