@@ -44,6 +44,18 @@ var MovieFavorites = mongoose.model( "moviefavorites", MovieFavoritesSchema, "mo
 //puts
 
 //deletes
+router.delete('/deleteFavorite/:id', function(req, res){
+  var id = req.params.id;
+  console.log("id",id);
+  MovieFavorites.findByIdAndRemove(id, function(err, deletedFavorite){
+    if(err){
+      consle.log(err);
+      res.sendStatus(500);
+    }
+    console.log(deletedFavorite);
+    res.send(deletedFavorite);
+  });//ends findByIdAndRemove
+});//ends router.delete to /deleteFavorite
 
 //exports
 module.exports = router;

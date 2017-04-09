@@ -62,18 +62,29 @@ klmApp.factory( 'MovieService', ['$http', function($http){
 
         $http.post('/favorites/addFavorite', favoriteObject).then(function(response){
           console.log(response);
+          $http.get('/favorites').then(function(response){
+            console.log("get all favorites",response);
+            favorites.list = response.data;
+            console.log("favorites.list");
+          });// ends get to favorites
         });//ends post to addFavorite
-
-        $http.get('/favorites').then(function(response){
-          console.log("get all favorites",response);
-          favorites.list = response.data;
-          console.log("favorites.list");
-        });
       },//ends addToFavorites
 
-    deleteMovie: function (index){
+    deleteMovie: function (index, id){
         console.log("you are trying to delete a movie");
-        favorites.list.splice(index, 1);
+        // favorites.list.splice(index, 1);
+        console.log("id", id);
+        var deleteId = {};
+        deleteId.id = id;
+        console.log("deleteId", deleteId);
+        $http.delete('/favorites/deleteFavorite/'+ id).then(function(response){
+          console.log(response);
+          $http.get('/favorites').then(function(response){
+            console.log("get all favorites",response);
+            favorites.list = response.data;
+            console.log("favorites.list");
+          });//ends get to favorites
+        });//ends delete to deleteFavorite
       },//ends deleteMovie
   };//ends return
 
