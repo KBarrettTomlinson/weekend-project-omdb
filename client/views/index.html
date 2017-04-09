@@ -43,7 +43,10 @@
 
         <div id = 'favoritesDisplay' class = 'col-sm-3'>
           <strong>Favorites</strong>
-          <p ng-repeat = 'movieTitle in favorites.list'>{{movieTitle.title}}</p>
+          <div ng-repeat = 'movieTitle in favorites.list'>
+            <p >{{movieTitle.title}}</p>
+            <button type="button" class="btn btn-default" ng-click='deleteMovie($index)'>Delete</button>
+          </div>
         </div>
 
         <div id = 'resultsDisplay' class = 'col-sm-9'>
