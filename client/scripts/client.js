@@ -43,7 +43,6 @@ klmApp.factory( 'MovieService', ['$http', function($http){
           movie.plot = response.data.Plot;
           searchResult.movie = movie;
         });//ends response
-      // $scope.searchResult = searchResult;
     },//ends findMovie
 
     addToFavorites:   function (title, year){
@@ -60,13 +59,9 @@ klmApp.factory( 'MovieService', ['$http', function($http){
 
         $http.get('/favorites').then(function(response){
           console.log("get all favorites",response);
-
+          favorites.list = response.data;
+          console.log("favorites.list");
         });
-
-        console.log(favoriteObject);
-        listOfFavoritesArray.push(favoriteObject);
-        console.log(listOfFavoritesArray, "listOfFavoritesArray");
-        favorites.list = listOfFavoritesArray;
       },//ends addToFavorites
 
     deleteMovie: function (index){
