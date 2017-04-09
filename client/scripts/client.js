@@ -8,6 +8,7 @@ klmApp.controller( 'MainController' , [ '$scope', '$http', function( $scope, $ht
   $scope.findMovie = findMovie;
 
   function findMovie(object){
+    console.log(object);
     var copy = angular.copy(object);
     var title = copy.title;
     object.title = '';
