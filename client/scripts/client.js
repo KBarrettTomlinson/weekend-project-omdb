@@ -9,20 +9,23 @@ klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope
 }]);//ends SearchController
 
 klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
-  MovieService.addToFavorites();
+  $scope.searchResult = MovieService.searchResult;
+  $scope.addToFavorites = MovieService.addToFavorites;
 }]);//ends DisplayController
 
 klmApp.controller('FavoritesController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.MovieService.favorites = MovieService.favorites;
-  MovieService.deleteMovie();
+  $scope.deleteMovie = Service.deleteMovie;
 }]);//ends FavoritesController
 
-klmApp.factory( 'MovieService', ['$http', function(){
+klmApp.factory( 'MovieService', ['$http', function($http){
   var listOfFavoritesArray = [];
   var favorites = {};
-  favorites.list = listOfFavoritesArray;
+  var searchResult = {};
+
 
   return{
+    searchResult: searchResult,
     favorites: favorites,
     findMovie: function (object){
       console.log("inside findMovie");
@@ -31,7 +34,7 @@ klmApp.factory( 'MovieService', ['$http', function(){
       var title = copy.title;
       console.log("copy",copy,"title", title);
       object.title = '';
-      var searchResult = {};
+      // var searchResult = {};
       $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
         then(function(response){
           console.log(response);
@@ -43,8 +46,9 @@ klmApp.factory( 'MovieService', ['$http', function(){
           movie.writer = response.data.Writer;
           movie.plot = response.data.Plot;
           searchResult.movie = movie;
+          console.log(searchResult);
         });//ends response
-      $scope.searchResult = searchResult;
+      // $scope.searchResult = searchResult;
     },//ends findMovie
 
     addToFavorites:   function (title, year){
@@ -57,12 +61,13 @@ klmApp.factory( 'MovieService', ['$http', function(){
         console.log(favoriteObject);
         listOfFavoritesArray.push(favoriteObject);
         console.log(listOfFavoritesArray, "listOfFavoritesArray");
+        favorites.list = listOfFavoritesArray;
       },//ends addToFavorites
 
     deleteMovie: function (index){
-      console.log("you are trying to delete a movie");
-      $scope.favorites.list.splice(index, 1);
-    },//ends deleteMovie
+        console.log("you are trying to delete a movie");
+        favorites.list.splice(index, 1);
+      },//ends deleteMovie
   };//ends return
 
 }]);//ends factory
