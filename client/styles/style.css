@@ -4,15 +4,18 @@ html, body{
 }
 
 body {
-  padding-top: 125px;
+  color: slategray;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 140px;
+  background-color: floralwhite;
 }
 
-/*div{
-  border: 1px solid black;
-}*/
+h1 {
+  color: indianred;
+  font-size: 48px;
+}
 
 #wrapper{
-
 }
 
 #headerWrapper{
@@ -20,10 +23,12 @@ text-align: center;
 }
 
 #header{
+  height: 90px;
 
 }
 
 #searchBar{
+  height: 40px;
 
 }
 
@@ -32,13 +37,39 @@ text-align: center;
 }
 
 #favoritesDisplay{
+  border-right: black solid 1px;
+  text-align: right;
+  font-family: 'Oswald', sans-serif;
+
+}
+
+#eachFavDiv{
+  font-size: 16px;
+  text-align: right;
 
 }
 
 #favoritesButton{
-  text-align: center;
+  text-align: left;
 }
 
 #resultsDisplay{
 
+}
+
+.poster{
+  text-align: center;
+}
+
+.favorite-text{
+  margin: 0;
+  margin-top: 10px;
+}
+
+.red{
+  color: firebrick;
+}
+
+.green{
+  color: olivedrab;
 }
