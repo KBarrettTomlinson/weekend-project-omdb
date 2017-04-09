@@ -22,6 +22,13 @@ klmApp.factory( 'MovieService', ['$http', function($http){
   var favorites = {};
   var searchResult = {};
 
+  $http.get('/favorites').then(function(response){
+    console.log("get all favorites",response);
+    favorites.list = response.data;
+    console.log("favorites.list");
+  });
+
+
   return{
     searchResult: searchResult,
     favorites: favorites,
