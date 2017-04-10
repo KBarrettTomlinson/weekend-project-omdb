@@ -4,15 +4,25 @@ html, body{
 }
 
 body {
-  color: slategray;
+  /*color: slategray;*/
+  color: navajowhite;
   font-family: 'Open Sans', sans-serif;
   padding-top: 140px;
-  background-color: floralwhite;
+  background-color: coral;
+  /*background-color: floralwhite;*/
 }
 
 h1 {
   color: indianred;
   font-size: 48px;
+}
+
+h1,h2,h3,h5{
+  text-transform: uppercase;
+}
+
+h5{
+  margin-top: 20px;
 }
 
 #wrapper{
@@ -50,15 +60,20 @@ text-align: center;
 }
 
 #favoritesButton{
-  text-align: left;
+  text-align: center;
 }
 
 #resultsDisplay{
 
 }
 
+#resultsText{
+  margin-top: 20px;
+}
+
 .poster{
   text-align: center;
+  margin-top: 20px;
 }
 
 .favorite-text{

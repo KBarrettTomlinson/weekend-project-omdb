@@ -44,7 +44,7 @@
 
         <div id = 'favoritesDisplay' class = 'col-md-3' ng-controller = 'FavoritesController'>
           <h2>Favorites</h2>
-          <div id = 'eachFavDiv' ng-repeat = 'movie in favorites.list'>
+          <div id = 'eachFavDiv' ng-repeat = 'movie in favorites.list | orderBy:"year"'>
             <p class = 'favorite-text'>{{movie.title}} - {{movie.year}}</p>
               <button type="button" class="btn btn-default btn-xs" ng-click='findMovie(movie)' >
                 <span class="glyphicon glyphicon-search green"></span>
@@ -64,7 +64,7 @@
 
             <div class = 'col-md-6'>
               <div class = row>
-                <div class = 'col-md-9'>
+                <div id = 'resultsText' class = 'col-md-9'>
                   <strong>Directed by:</strong>
                   <p>{{searchResult.movie.director}}</p>
                   <strong>Written by:</strong>
@@ -74,8 +74,9 @@
                 </div>
 
                 <div id = 'favoritesButton' class = 'col-md-3'>
-                  <button type="button" class="btn btn-default btn-sm" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
-                    Add to Favorites
+                  <h5>Add to Favorites</h5>
+                  <button type="button" class="btn btn-default btn-xl" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
+                    <span class="glyphicon glyphicon-heart red"></span>
                   </button>
                 </div>
               </div>
