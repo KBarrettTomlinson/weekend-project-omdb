@@ -30,6 +30,7 @@ h5{
 }
 
 #wrapper{
+  min-width: 768px;
 }
 
 #headerWrapper{
