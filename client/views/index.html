@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="klmApp">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 
-    <title>Keith Loves Movies (not affiliate with Doug Loves Movies)</title>
+    <title>Keith Loves Movies</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="styles/style.css">
 
@@ -18,7 +19,73 @@
 
   </head>
   <body>
-    <h1> is this thing on?</h1>
+    <div id = 'wrapper' class = 'container'>
+      <div id = 'headerWrapper' class = 'navbar navbar-default navbar-fixed-top'>
 
+        <div id = 'header' class = 'row'>
+          <h1> Keith &hearts; 's Movies <small class = 'even-smaller'>* not affiliated with Doug Loves Movies</small></h1>
+        </div>
+
+        <div id = 'searchBar' class = 'row' ng-controller = 'SearchController'>
+          <form class="form-inline">
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="searchMovieTitle" placeholder="Enter Movie Title" ng-model='searchObject.title'>
+            </div>
+
+            <button type="button" class="btn btn-default" ng-click='findMovie(searchObject)'>Search</button>
+
+          </form>
+        </div>
+
+      </div>
+
+      <div id = 'displayWrapper' class = 'row'>
+
+        <div id = 'favoritesDisplay' class = 'col-md-3' ng-controller = 'FavoritesController'>
+          <h2>Favorites</h2>
+          <div id = 'eachFavDiv' ng-repeat = 'movie in favorites.list | orderBy:"year"'>
+            <p class = 'favorite-text'>{{movie.title}} - {{movie.year}}</p>
+              <button type="button" class="btn btn-default btn-xs" ng-click='findMovie(movie)' >
+                <span class="glyphicon glyphicon-search green"></span>
+              </button>
+              <button type="button" class="btn btn-default btn-xs" ng-click='deleteMovie(movie._id)' >
+                <span class="glyphicon glyphicon-remove red"></span>
+              </button>
+          </div>
+        </div>
+
+        <div id = 'resultsDisplay' class = 'col-md-9' ng-controller = 'DisplayController' >
+          <div class = 'row' >
+
+            <div class = 'poster col-md-6'>
+              <img ng-class="classesObject.classes" src="{{searchResult.movie.poster}}">
+            </div>
+
+            <div class = 'col-md-6'>
+              <div class = 'row' ng-class="classesObject.classes">
+                <div id = 'resultsText' class = 'col-md-9'>
+                  <strong>Directed by:</strong>
+                  <p>{{searchResult.movie.director}}</p>
+                  <strong>Written by:</strong>
+                  <p>{{searchResult.movie.writer}}</p>
+                  <p>{{searchResult.movie.year}}</p>
+                  <p>{{searchResult.movie.plot}}</p>
+                </div>
+
+                <div id = 'favoritesButton' class = 'col-md-3'>
+                  <h5>Add to Favorites</h5>
+                  <button type="button" class="btn btn-default btn-xl" ng-click = 'addToFavorites(searchResult.movie.title,searchResult.movie.year)'>
+                    <span class="glyphicon glyphicon-heart red"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </body>
 </html>
