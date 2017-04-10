@@ -3,12 +3,12 @@ console.log("I'm still here for you.");
 var klmApp = angular.module( 'klmApp', []);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
-  console.log("does this happen on loading of the webpage?");
   $scope.searchObject = {};
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
 
 klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
+  $scope.classesObject = MovieService.classesObject;
   $scope.searchResult = MovieService.searchResult;
   $scope.addToFavorites = MovieService.addToFavorites;
 }]);//ends DisplayController
@@ -23,21 +23,23 @@ klmApp.factory( 'MovieService', ['$http', function($http){
   var listOfFavoritesArray = [];
   var favorites = {};
   var searchResult = {};
+  var listOfClasses = ["hidden"];
+  var classesObject = {};
+  classesObject.classes = listOfClasses;
 
   $http.get('/favorites').then(function(response){
     console.log("get all favorites",response);
     favorites.list = response.data;
-    console.log("favorites.list");
   });
 
 
   return{
+    classesObject: classesObject,
     searchResult: searchResult,
     favorites: favorites,
     findMovie: function (object){
       var copy = angular.copy(object);
       var title = copy.title;
-      console.log("object._id",object._id);
       if ("undefined" === typeof object._id){
         object.title = '';
       }
@@ -51,11 +53,11 @@ klmApp.factory( 'MovieService', ['$http', function($http){
           movie.writer = response.data.Writer;
           movie.plot = response.data.Plot;
           searchResult.movie = movie;
+          listOfClasses.pop("hidden");
         });//ends response
     },//ends findMovie
 
     addToFavorites:   function (title, year){
-        console.log( "You're trying to add to favorites", title, year);
         var favoriteObject = {};
         var newTitle = angular.copy(title);
         var newYear = angular.copy(year);
@@ -63,11 +65,9 @@ klmApp.factory( 'MovieService', ['$http', function($http){
         favoriteObject.year = newYear;
 
         $http.post('/favorites/addFavorite', favoriteObject).then(function(response){
-          console.log(response);
           $http.get('/favorites').then(function(response){
-            console.log("get all favorites",response);
+            console.log(response);
             favorites.list = response.data;
-            console.log("favorites.list");
           });// ends get to favorites
         });//ends post to addFavorite
       },//ends addToFavorites
