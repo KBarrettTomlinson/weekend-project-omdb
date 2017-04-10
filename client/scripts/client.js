@@ -3,12 +3,12 @@ console.log("I'm still here for you.");
 var klmApp = angular.module( 'klmApp', []);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
-  console.log("does this happen on loading of the webpage?");
   $scope.searchObject = {};
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
 
 klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService){
+  $scope.classesObject = MovieService.classesObject;
   $scope.searchResult = MovieService.searchResult;
   $scope.addToFavorites = MovieService.addToFavorites;
 }]);//ends DisplayController
@@ -23,6 +23,9 @@ klmApp.factory( 'MovieService', ['$http', function($http){
   var listOfFavoritesArray = [];
   var favorites = {};
   var searchResult = {};
+  var listOfClasses = ["hidden"];
+  var classesObject = {};
+  classesObject.classes = listOfClasses;
 
   $http.get('/favorites').then(function(response){
     console.log("get all favorites",response);
@@ -32,6 +35,7 @@ klmApp.factory( 'MovieService', ['$http', function($http){
 
 
   return{
+    classesObject: classesObject,
     searchResult: searchResult,
     favorites: favorites,
     findMovie: function (object){
@@ -51,6 +55,7 @@ klmApp.factory( 'MovieService', ['$http', function($http){
           movie.writer = response.data.Writer;
           movie.plot = response.data.Plot;
           searchResult.movie = movie;
+          listOfClasses.pop("hidden");
         });//ends response
     },//ends findMovie
 
