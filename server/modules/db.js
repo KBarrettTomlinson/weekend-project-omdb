@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose');
 var mongoURI = 'mongodb://desmond:5468@ds157740.mlab.com:57740/keithlovesmovies';
+// var mongoURI = 'mongodb://localhost:27017/favoritemoviesdata';
 var MongoDB = mongoose.connect(mongoURI).connection;
 
 MongoDB.on('error', function(err){
