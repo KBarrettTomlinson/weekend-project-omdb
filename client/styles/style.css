@@ -4,15 +4,32 @@ html, body{
 }
 
 body {
-  padding-top: 125px;
+  /*color: slategray;*/
+  color: navajowhite;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 140px;
+  background-color: coral;
+  /*background-color: floralwhite;*/
 }
 
-/*div{
-  border: 1px solid black;
-}*/
+h1 {
+  color: indianred;
+  font-size: 48px;
+}
+
+h1,h2,h3,h5{
+  text-transform: uppercase;
+}
+
+h5{
+  margin-top: 20px;
+}
+
+.even-smaller{
+  font-size: 8px;
+}
 
 #wrapper{
-
 }
 
 #headerWrapper{
@@ -20,10 +37,12 @@ text-align: center;
 }
 
 #header{
+  height: 90px;
 
 }
 
 #searchBar{
+  height: 40px;
 
 }
 
@@ -32,6 +51,15 @@ text-align: center;
 }
 
 #favoritesDisplay{
+  border-right: black solid 1px;
+  text-align: right;
+  font-family: 'Oswald', sans-serif;
+
+}
+
+#eachFavDiv{
+  font-size: 16px;
+  text-align: right;
 
 }
 
@@ -41,4 +69,26 @@ text-align: center;
 
 #resultsDisplay{
 
+}
+
+#resultsText{
+  margin-top: 20px;
+}
+
+.poster{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.favorite-text{
+  margin: 0;
+  margin-top: 10px;
+}
+
+.red{
+  color: firebrick;
+}
+
+.green{
+  color: olivedrab;
 }

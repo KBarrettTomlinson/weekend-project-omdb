@@ -3,6 +3,7 @@ console.log("I'm still here for you.");
 var klmApp = angular.module( 'klmApp', []);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
+  console.log("does this happen on loading of the webpage?");
   $scope.searchObject = {};
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
@@ -15,6 +16,7 @@ klmApp.controller('DisplayController', ['$scope', 'MovieService', function($scop
 klmApp.controller('FavoritesController', ['$scope', 'MovieService', function($scope, MovieService){
   $scope.favorites = MovieService.favorites;
   $scope.deleteMovie = MovieService.deleteMovie;
+  $scope.findMovie = MovieService.findMovie;
 }]);//ends FavoritesController
 
 klmApp.factory( 'MovieService', ['$http', function($http){
@@ -35,10 +37,10 @@ klmApp.factory( 'MovieService', ['$http', function($http){
     findMovie: function (object){
       var copy = angular.copy(object);
       var title = copy.title;
-
-      object.title = '';
-
-      // var searchResult = {};
+      console.log("object._id",object._id);
+      if ("undefined" === typeof object._id){
+        object.title = '';
+      }
       $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
         then(function(response){
           var movie = {};
@@ -70,19 +72,13 @@ klmApp.factory( 'MovieService', ['$http', function($http){
         });//ends post to addFavorite
       },//ends addToFavorites
 
-    deleteMovie: function (index, id){
-        console.log("you are trying to delete a movie");
-        // favorites.list.splice(index, 1);
-        console.log("id", id);
+    deleteMovie: function (id){
         var deleteId = {};
         deleteId.id = id;
-        console.log("deleteId", deleteId);
         $http.delete('/favorites/deleteFavorite/'+ id).then(function(response){
           console.log(response);
           $http.get('/favorites').then(function(response){
-            console.log("get all favorites",response);
             favorites.list = response.data;
-            console.log("favorites.list");
           });//ends get to favorites
         });//ends delete to deleteFavorite
       },//ends deleteMovie
