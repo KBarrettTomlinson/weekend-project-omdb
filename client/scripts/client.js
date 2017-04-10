@@ -3,6 +3,7 @@ console.log("I'm still here for you.");
 var klmApp = angular.module( 'klmApp', []);
 
 klmApp.controller('SearchController', ['$scope', 'MovieService', function($scope, MovieService){
+  console.log("does this happen on loading of the webpage?");
   $scope.searchObject = {};
   $scope.findMovie = MovieService.findMovie;
 }]);//ends SearchController
