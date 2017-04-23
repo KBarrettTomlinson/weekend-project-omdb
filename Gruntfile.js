@@ -11,7 +11,7 @@ module.exports = function(grunt){
       html: {
         expand: true,
         cwd: 'client/views',
-        src: ['index.html','partials/*.html'],
+        src: ['index.html','partials/*.html','templates/*.html'],
         dest: 'server/public/views/'
       },
       client: {
