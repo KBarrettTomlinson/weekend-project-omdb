@@ -14,31 +14,14 @@
     <script type="text/javascript" src="vendors/jquery/jquery.js"></script>
     <script type="text/javascript" src="vendors/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="vendors/angular/angular.js"></script>
-    <script type="text/javascript" src="scripts/client.js"></script>
+    <script type="text/javascript" src="scripts/client.min.js"></script>
 
 
   </head>
   <body>
     <div id = 'wrapper' class = 'container'>
-      <div id = 'headerWrapper' class = 'navbar navbar-default navbar-fixed-top'>
 
-        <div id = 'header' class = 'row hidden-sm hidden-xs'>
-          <h1> Keith &hearts; 's Movies <small class = 'even-smaller'>* not affiliated with Doug Loves Movies</small></h1>
-        </div>
-
-        <div id = 'searchBar' class = 'row' ng-controller = 'SearchController'>
-          <form class="form-inline">
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="searchMovieTitle" placeholder="Enter Movie Title" ng-model='searchObject.title'>
-            </div>
-
-            <button type="button" class="btn btn-default" ng-click='findMovie(searchObject)'>Search</button>
-
-          </form>
-        </div>
-
-      </div>
+      <div ng-include= "'views/partials/nav.html'"></div>
 
       <div id = 'displayWrapper' class = 'row'>
 
