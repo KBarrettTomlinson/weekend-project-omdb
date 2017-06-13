@@ -15,12 +15,16 @@ klmApp.factory( 'MovieService', ['$http', function($http){
   getFavorites();
 
   function findMovie(object){
+    console.log("inside findMovie", object);
     var copy = angular.copy(object);
     var title = copy.title;
+    console.log("title",title);
     if ("undefined" === typeof object._id){
       object.title = '';
     }
-    $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
+    // '/favorites/deleteFavorite/'+ id
+    // $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
+    $http.get('/favorites/search/'+ title).
       then(function(response){
         var movie = {};
         movie.title = response.data.Title;
@@ -31,6 +35,7 @@ klmApp.factory( 'MovieService', ['$http', function($http){
         movie.plot = response.data.Plot;
         searchResult.movie = movie;
         listOfClasses.pop("hidden");
+        console.log("response from search", movie);
       });//ends response
   }//ends findMovie
 

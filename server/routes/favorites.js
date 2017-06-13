@@ -2,6 +2,7 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
+var request = require("request");
 
 //schema
 var MovieFavoritesSchema = mongoose.Schema({
@@ -25,6 +26,22 @@ var MovieFavorites = mongoose.model( "moviefavorites", MovieFavoritesSchema, "mo
       res.send(allFavorites);
     });
   });//ends get all favorites
+
+  //search OMDB API for title
+  router.get('/search/:title', function(req, res) {
+      var title = req.params.title;
+      console.log("get /search/", title);
+      console.log("testing env variables", process.env.TESTING);
+      var url = 'http://www.omdbapi.com/?apikey=' + process.env.OMDBAPI + '&t=' + title;
+      console.log("url", url);
+      request(url, function(err, resp, body) {
+          console.log("after the request returns");
+          if (err) {
+              res.sendStatus(500);
+          }
+          res.send(body);
+      }); //end request
+  }); //ends get all favorites
 
 //posts
   router.post( '/addFavorite', function(req,res){

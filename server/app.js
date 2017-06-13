@@ -14,6 +14,7 @@ app.set( 'port', (process.env.PORT || 3000 ));
 
 //middleware
 var bodyParser = require( 'body-parser' );
+var dotenv = require('dotenv').config();
 
 app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({extended: true}));
