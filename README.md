@@ -1,3 +1,5 @@
+
+# Keith Loves Movies
 # Welcome to your 5th Weekend Challenge!
 
 For this challenge, you will be working with Angular and the OMDB API to build an application that can search movies, and then a user can store their favorites!
@@ -25,3 +27,25 @@ Add the ability to remove a movie from the Mongo Database, and ensure that the f
 
 # Master Mode
 Host the application on Heroku and mLabs. No need to do a data dump of an existing database.
+
+One Paragraph of project description goes here
+
+## Getting Started
+Fork or close the repository. 
+
+In the terminal window type: npm install
+
+On seperate terminals
+
+type: grunt
+
+type: npm start
+
+
+## Built With
+MEAN Stack
+OMDB API
+
+## Authors
+
+* **Keith Tomlinson**
