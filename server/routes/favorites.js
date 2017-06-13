@@ -30,10 +30,7 @@ var MovieFavorites = mongoose.model( "moviefavorites", MovieFavoritesSchema, "mo
   //search OMDB API for title
   router.get('/search/:title', function(req, res) {
       var title = req.params.title;
-      console.log("get /search/", title);
-      console.log("testing env variables", process.env.TESTING);
       var url = 'http://www.omdbapi.com/?apikey=' + process.env.OMDBAPI + '&t=' + title;
-      console.log("url", url);
       request(url, function(err, resp, body) {
           console.log("after the request returns");
           if (err) {

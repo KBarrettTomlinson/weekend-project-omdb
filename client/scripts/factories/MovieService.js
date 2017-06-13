@@ -22,8 +22,6 @@ klmApp.factory( 'MovieService', ['$http', function($http){
     if ("undefined" === typeof object._id){
       object.title = '';
     }
-    // '/favorites/deleteFavorite/'+ id
-    // $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').
     $http.get('/favorites/search/'+ title).
       then(function(response){
         var movie = {};
